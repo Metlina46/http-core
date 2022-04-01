@@ -2,92 +2,98 @@
 <html lang="en">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <title>HTTP Caching</title><script>
-var buttonsAdded = false;
+      <title>RFC 9111 - HTTP Caching</title><script>
+function getMeta(rfcno, container) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://www.rfc-editor.org/rfc/rfc" + rfcno + ".json", true);
+  xhr.onload = function (e) {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        var data = JSON.parse(xhr.response);
+        
+        var cont = document.getElementById(container);
+        // empty the container
+        while (cont.firstChild) {
+          cont.removeChild(myNode.firstChild);
+        }
 
-function initFeedback() {
-  var fb = document.createElement("div");
-  fb.className = "feedback noprint";
-  fb.setAttribute("onclick", "feedback();");
-  fb.appendChild(document.createTextNode("feedback"));
+        var c = data.status;
+        if (c) {
+          var bld = newElementWithText("b", c);
+          cont.appendChild(bld);
+        } else {
+          cont.appendChild(newElementWithText("i", "(document status unknown)"));
+        }
 
-  document.body.appendChild(fb);
-}
+        c = data.updated_by;
+        if (c && c.length > 0 && c[0] !== null && c[0].length > 0) {
+          cont.appendChild(newElement("br"));
+          cont.appendChild(newText("Updated by: "));
+          appendRfcLinks(cont, c);
+        }
 
-function feedback() {
-  toggleButtonsToElementsByName("h2");
-  toggleButtonsToElementsByName("h3");
-  toggleButtonsToElementsByName("h4");
-  toggleButtonsToElementsByName("h5");
+        c = data.obsoleted_by;
+        if (c && c.length > 0 && c[0] !== null && c[0].length > 0) {
+          cont.appendChild(newElement("br"));
+          cont.appendChild(newText("Obsoleted by: "));
+          appendRfcLinks(cont, c);
+        }
 
-  buttonsAdded = !buttonsAdded;
-}
+        c = data.errata_url;
+        if (c) {
+          cont.appendChild(newElement("br"));
+          var link = newElementWithText("a", "errata");
+          link.setAttribute("href", c);
+          var errata = newElementWithText("i", "This document has ");
+          errata.appendChild(link);
+          errata.appendChild(newText("."));
+          cont.appendChild(errata);
+        }
 
-function toggleButtonsToElementsByName(name) {
-  var list = document.getElementsByTagName(name);
-  for (var i = 0; i < list.length; i++) {
-    toggleButton(list.item(i));
-  }
-}
-
-function toggleButton(node) {
-  if (! buttonsAdded) {
-
-    // docname
-    var template = "mailto:ietf-http-wg@w3.org?subject={docname},%20%22{section}%22&body=<{ref}>:";
-
-    var id = node.getAttribute("id");
-    // try also parent
-    if (id == null || id == "") {
-      var id = node.parentNode.getAttribute("id");
-    }
-    // better id available?
-    var titlelinks = node.getElementsByTagName("a");
-    for (var i = 0; i < titlelinks.length; i++) {
-      var tl = titlelinks.item(i);
-      if (tl.getAttribute("id")) {
-        id = tl.getAttribute("id");
+        cont.style.display = "block";
+      } else {
+        console.error(xhr.statusText);
       }
     }
-    
-    // ref
-    var ref = window.location.toString();
-    var hash = ref.indexOf("#");
-    if (hash != -1) {
-      ref = ref.substring(0, hash);
+  };
+  xhr.onerror = function (e) {
+    console.error(xhr.status + " " + xhr.statusText);
+  };
+  xhr.send(null);
+}
+function appendRfcLinks(parent, updates) {
+  var template = "https://www.rfc-editor.org/rfc/rfc{rfc}.html";
+  for (var i = 0; i < updates.length; i++) {
+    var rfc = updates[i].trim().toLowerCase();
+    if (rfc.substring(0, 3) == "rfc") {
+      var no = parseInt(rfc.substring(3), 10);
+      
+      var link = newElement("a");
+      link.setAttribute("href", template.replace("{rfc}", no));
+      link.appendChild(newText(no));
+      parent.appendChild(link);
+    } else {
+      parent.appendChild(newText(rfc));
     }
-    if (id != null && id != "") {
-      ref += "#" + id;
-    }
-
-    // docname
-    var docname = "draft-ietf-httpbis-cache-latest";
-
-    // section
-    var section = node.textContent;
-    section = section.replace("\u00a0", " ").trim();
-
-    // build URI from template
-    var uri = template.replace("{docname}", encodeURIComponent(docname));
-    uri = uri.replace("{section}", encodeURIComponent(section));
-    uri = uri.replace("{ref}", encodeURIComponent(ref));
-
-    var button = document.createElement("a");
-    button.className = "fbbutton noprint";
-    button.setAttribute("href", uri);
-    button.appendChild(document.createTextNode("send feedback"));
-    node.appendChild(button);
-  }
-  else {
-    var buttons = node.getElementsByTagName("a");
-    for (var i = 0; i < buttons.length; i++) {
-      var b = buttons.item(i);
-      if (b.className == "fbbutton noprint") {
-        node.removeChild(b);
-      }
+    if (i != updates.length - 1) {
+      parent.appendChild(newText(", "));
     }
   }
-}</script><script>
+}
+
+// DOM helpers
+function newElement(name) {
+  return document.createElement(name);
+}
+function newElementWithText(name, txt) {
+  var e = document.createElement(name);
+  e.appendChild(newText(txt));
+  return e;
+}
+function newText(text) {
+  return document.createTextNode(text);
+}
+</script><script>
 function anchorRewrite() {
   map = { "DIGIT": "core.rules", "HTTP-date": "imported.rules", "OWS": "imported.rules", "field-name": "imported.rules", "quoted-string": "imported.rules", "token": "imported.rules", "header.age": "field.age", "Age": "field.age", "age-value": "field.age", "header.cache-control": "field.cache-control", "Cache-Control": "field.cache-control", "cache-directive": "field.cache-control", "cache-response-directive": "cache-response-directive", "header.expires": "field.expires", "Expires": "field.expires", "header.pragma": "field.pragma", "extension-pragma": "field.pragma", "Pragma": "field.pragma", "pragma-directive": "field.pragma", "header.warning": "field.warning", "Warning": "field.warning"};
   if (window.location.hash.length >= 1) {
@@ -505,9 +511,7 @@ ul.ind li li {
 .avoidbreakafter {
   page-break-after: avoid;
 }
-section.rfcEditorRemove > div:first-of-type {
-  font-style: italic;
-}.bcp14 {
+.bcp14 {
   font-style: normal;
   text-transform: lowercase;
   font-variant: small-caps;
@@ -565,28 +569,13 @@ blockquote > * .bcp14 {
 }
 h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:hover > a.self {
     visibility: visible;
-}.feedback {
-  position: fixed;
-  bottom: 1%;
-  right: 1%;
-  padding: 3px 5px;
-  color: var(--col-bg);
-  border-radius: 5px;
-  background: #006400;
-  border: 1px solid silver;
-  -webkit-user-select: none; 
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
-.fbbutton {
-  margin-left: 1em;
-  color: #303030;
-  font-size: small;
-  font-weight: normal;
-  background: #d0d000;
-  padding: 1px 4px;
-  border: 1px solid silver;
-  border-radius: 5px;
+.docstatus {
+  border: 1px solid var(--col-fg);
+  display: none;
+  float: right;
+  margin: 2em;
+  padding: 1em;
   -webkit-user-select: none; 
   -moz-user-select: none;
   -ms-user-select: none;
@@ -643,7 +632,7 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
 @page {
   font-family: 'Noto Sans', segoe, optima, arial, sans-serif, serif;
   @top-left {
-       content: "Internet-Draft";
+       content: "RFC 9111";
   }
   @top-right {
        content: "April 2022";
@@ -655,7 +644,7 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
        content: "Fielding, et al.";
   }
   @bottom-center {
-       content: "Expires October 3, 2022";
+       content: "Standards Track";
   }
   @bottom-right {
        content: "[Page " counter(page) "]";
@@ -688,8 +677,9 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
       <link rel="Chapter" title="9 References" href="#rfc.section.9">
       <link rel="Appendix" title="A Collected ABNF" href="#rfc.section.A">
       <link rel="Appendix" title="B Changes from RFC 7234" href="#rfc.section.B">
-      <link rel="Appendix" title="C Change Log" href="#rfc.section.C">
       <link rel="Appendix" title="Acknowledgements" href="#rfc.section.unnumbered-1">
+      <link rel="Alternate" title="Plain Text Version" href="http://www.ietf.org/rfc/rfc9111.txt">
+      <link rel="Help" title="RFC-Editor's Status Page" href="https://www.rfc-editor.org/info/rfc9111">
       <meta name="viewport" content="initial-scale=1">
       <meta name="generator" content="http://greenbytes.de/tech/webdav/rfcxml.xslt, Revision 1.1433, 2022/01/29 17:50:51, XSLT processor: SAXON HE 10.6, XSLT vendor: Saxonica http://www.saxonica.com/">
       <meta name="keywords" content="Hypertext Transfer Protocol, HTTP, HTTP Caching">
@@ -697,33 +687,35 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
       <meta name="dcterms.creator" content="Fielding, R.">
       <meta name="dcterms.creator" content="Nottingham, M.">
       <meta name="dcterms.creator" content="Reschke, J.">
-      <meta name="dcterms.issued" content="2022-04-01">
+      <meta name="dcterms.identifier" content="urn:ietf:rfc:9111">
+      <meta name="dcterms.issued" content="2022-04">
       <meta name="dct.replaces" content="urn:ietf:rfc:7234">
       <meta name="dcterms.abstract" content="The Hypertext Transfer Protocol (HTTP) is a stateless application-level protocol for distributed, collaborative, hypertext information systems. This document defines HTTP caches and the associated header fields that control cache behavior or indicate cacheable response messages. This document obsoletes RFC 7234.">
+      <meta name="dcterms.isPartOf" content="urn:issn:2070-1721">
       <meta name="description" content="The Hypertext Transfer Protocol (HTTP) is a stateless application-level protocol for distributed, collaborative, hypertext information systems. This document defines HTTP caches and the associated header fields that control cache behavior or indicate cacheable response messages. This document obsoletes RFC 7234.">
    </head>
-   <body onload="initFeedback();">
+   <body onload="getMeta(&#34;9111&#34;,&#34;rfc.meta&#34;);">
       <header>
          <table class="header" id="rfc.headerblock">
             <tbody>
                <tr>
-                  <td class="left"><a href="https://datatracker.ietf.org/wg/httpbis">HTTP Working Group</a></td>
+                  <td class="left">Internet Engineering Task Force (IETF)</td>
                   <td class="right">R. Fielding, Editor</td>
                </tr>
                <tr>
-                  <td class="left">Internet-Draft</td>
+                  <td class="left">Request for Comments: 9111</td>
                   <td class="right">Adobe</td>
                </tr>
                <tr>
-                  <td class="left">Obsoletes: <a href="#RFC7234">7234</a> (if approved)</td>
+                  <td class="left">Obsoletes: <a href="#RFC7234">7234</a></td>
                   <td class="right">M. Nottingham, Editor</td>
                </tr>
                <tr>
-                  <td class="left">Intended status: Standards Track</td>
+                  <td class="left">Category: Standards Track</td>
                   <td class="right">Fastly</td>
                </tr>
                <tr>
-                  <td class="left">Expires: October 3, 2022</td>
+                  <td class="left">ISSN: 2070-1721</td>
                   <td class="right">J. Reschke, Editor</td>
                </tr>
                <tr>
@@ -732,13 +724,12 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
                </tr>
                <tr>
                   <td class="left"></td>
-                  <td class="right">April 1, 2022</td>
+                  <td class="right">April 2022</td>
                </tr>
             </tbody>
          </table>
          <div id="rfc.title">
             <h1>HTTP Caching</h1>
-            <div class="filename"><a href="https://datatracker.ietf.org/doc/draft-ietf-httpbis-cache" class="smpl">draft-ietf-httpbis-cache-latest</a></div>
          </div>
       </header>
       <section>
@@ -753,40 +744,21 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
             <p>This document obsoletes RFC 7234.<a class="self" href="#rfc.abstract.p.2">¶</a></p>
          </div>
       </section>
-      <section class="note rfcEditorRemove">
-         <h2 id="rfc.note.1"><a href="#rfc.note.1">Editorial Note</a></h2>
-         <div id="rfc.note.1.p.1">
-            <p>This note is to be removed before publishing as an RFC.<a class="self" href="#rfc.note.1.p.1">¶</a></p>
-         </div>
-         <div id="rfc.note.1.p.2">
-            <p>Discussion of this draft takes place on the HTTP working group mailing list (ietf-http-wg@w3.org),
-               which is archived at <a href="https://lists.w3.org/Archives/Public/ietf-http-wg/">https://lists.w3.org/Archives/Public/ietf-http-wg/</a>.<a class="self" href="#rfc.note.1.p.2">¶</a></p>
-         </div>
-         <div id="rfc.note.1.p.3">
-            <p>Working Group information can be found at <a href="https://httpwg.org/">https://httpwg.org/</a>; source code and issues list for this draft can be found at <a href="https://github.com/httpwg/http-core">https://github.com/httpwg/http-core</a>.<a class="self" href="#rfc.note.1.p.3">¶</a></p>
-         </div>
-         <div id="rfc.note.1.p.4">
-            <p>The changes in this draft are summarized in <a href="#changes.since.19" title="Since draft-ietf-httpbis-cache-19">Appendix C.1</a>.<a class="self" href="#rfc.note.1.p.4">¶</a></p>
-         </div>
-      </section>
+      <aside id="rfc.meta" class="docstatus"></aside>
       <section id="rfc.status">
          <h2><a href="#rfc.status">Status of This Memo</a></h2>
          <div id="rfc.boilerplate.1.p.1">
-            <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78
-               and BCP 79.<a class="self" href="#rfc.boilerplate.1.p.1">¶</a></p>
+            <p>This is an Internet Standards Track document.<a class="self" href="#rfc.boilerplate.1.p.1">¶</a></p>
          </div>
          <div id="rfc.boilerplate.1.p.2">
-            <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).
-               Note that other groups may also distribute working documents as Internet-Drafts. The
-               list of current Internet-Drafts is at <a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a>.<a class="self" href="#rfc.boilerplate.1.p.2">¶</a></p>
+            <p>This document is a product of the Internet Engineering Task Force (IETF). It represents
+               the consensus of the IETF community. It has received public review and has been approved
+               for publication by the Internet Engineering Steering Group (IESG). Further information
+               on Internet Standards is available in <a href="https://www.rfc-editor.org/rfc/rfc7841.html#section-2">Section 2 of RFC 7841</a>.<a class="self" href="#rfc.boilerplate.1.p.2">¶</a></p>
          </div>
          <div id="rfc.boilerplate.1.p.3">
-            <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated,
-               replaced, or obsoleted by other documents at any time. It is inappropriate to use
-               Internet-Drafts as reference material or to cite them other than as “work in progress”.<a class="self" href="#rfc.boilerplate.1.p.3">¶</a></p>
-         </div>
-         <div id="rfc.boilerplate.1.p.4">
-            <p>This Internet-Draft will expire on October 3, 2022.<a class="self" href="#rfc.boilerplate.1.p.4">¶</a></p>
+            <p>Information about the current status of this document, any errata, and how to provide
+               feedback on it may be obtained at <a href="https://www.rfc-editor.org/info/rfc9111">https://www.rfc-editor.org/info/rfc9111</a>.<a class="self" href="#rfc.boilerplate.1.p.3">¶</a></p>
          </div>
       </section>
       <section id="rfc.copyrightnotice">
@@ -911,10 +883,6 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
             </li>
             <li><a href="#rfc.section.A">Appendix A.</a>&nbsp;&nbsp;&nbsp;<a href="#collected.abnf">Collected ABNF</a></li>
             <li><a href="#rfc.section.B">Appendix B.</a>&nbsp;&nbsp;&nbsp;<a href="#changes.from.rfc.7234">Changes from RFC 7234</a></li>
-            <li><a href="#rfc.section.C">Appendix C.</a>&nbsp;&nbsp;&nbsp;<a href="#change.log">Change Log</a><ul>
-                  <li><a href="#rfc.section.C.1">C.1.</a>&nbsp;&nbsp;&nbsp;<a href="#changes.since.19">Since draft-ietf-httpbis-cache-19</a></li>
-               </ul>
-            </li>
             <li><a href="#acks">Acknowledgements</a></li>
             <li><a href="#rfc.index">Index</a></li>
             <li><a href="#rfc.authors">Authors' Addresses</a></li>
@@ -2583,7 +2551,7 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
                <h3 id="rfc.section.9.1"><a href="#rfc.section.9.1">9.1.</a> Normative References</h3>
                <dl class="reference">
                   <dt id="HTTP">[HTTP]</dt>
-                  <dd>Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke, Ed., “<a href="draft-ietf-httpbis-semantics-latest.html">HTTP Semantics</a>”, Internet-Draft draft-ietf-httpbis-semantics-latest (<a href="https://datatracker.ietf.org/doc/draft-ietf-httpbis-semantics">work in progress</a>), April 2022.</dd>
+                  <dd>Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke, Ed., “<a href="draft-ietf-httpbis-semantics-latest.html">HTTP Semantics</a>”, RFC 9110, <a href="https://dx.doi.org/10.17487/RFC9110">DOI 10.17487/RFC9110</a>, April 2022.</dd>
                   <dt id="RFC2119">[RFC2119]</dt>
                   <dd>Bradner, S., “<a href="https://www.rfc-editor.org/rfc/rfc2119.html">Key words for use in RFCs to Indicate Requirement Levels</a>”, BCP 14, RFC 2119, <a href="https://dx.doi.org/10.17487/RFC2119">DOI 10.17487/RFC2119</a>, March 1997, &lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;.</dd>
                   <dt id="RFC5234">[RFC5234]</dt>
@@ -2602,7 +2570,7 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
                   <dt id="COOKIE">[COOKIE]</dt>
                   <dd>Barth, A., “<a href="https://www.rfc-editor.org/rfc/rfc6265.html">HTTP State Management Mechanism</a>”, RFC 6265, <a href="https://dx.doi.org/10.17487/RFC6265">DOI 10.17487/RFC6265</a>, April 2011, &lt;<a href="https://www.rfc-editor.org/info/rfc6265">https://www.rfc-editor.org/info/rfc6265</a>&gt;.</dd>
                   <dt id="HTTP11">[HTTP/1.1]</dt>
-                  <dd>Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke, Ed., “<a href="draft-ietf-httpbis-messaging-latest.html">HTTP/1.1</a>”, Internet-Draft draft-ietf-httpbis-messaging-latest (<a href="https://datatracker.ietf.org/doc/draft-ietf-httpbis-messaging">work in progress</a>), April 2022.</dd>
+                  <dd>Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke, Ed., “<a href="draft-ietf-httpbis-messaging-latest.html">HTTP/1.1</a>”, RFC 9112, <a href="https://dx.doi.org/10.17487/RFC9112">DOI 10.17487/RFC9112</a>, April 2022.</dd>
                   <dt id="RFC2616">[RFC2616]</dt>
                   <dd>Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., and T. Berners-Lee, “<a href="https://www.rfc-editor.org/rfc/rfc2616.html">Hypertext Transfer Protocol -- HTTP/1.1</a>”, RFC 2616, <a href="https://dx.doi.org/10.17487/RFC2616">DOI 10.17487/RFC2616</a>, June 1999, &lt;<a href="https://www.rfc-editor.org/info/rfc2616">https://www.rfc-editor.org/info/rfc2616</a>&gt;.</dd>
                   <dt id="RFC5861">[RFC5861]</dt>
@@ -2680,25 +2648,6 @@ h1:hover > a.self, h2:hover > a.self, h3:hover > a.self, li:hover > a.self, p:ho
                potentially useful — was entirely advisory. In practice, Warning was not added by
                caches or intermediaries. (<a href="#field.warning" id="rfc.xref.field.warning.2" title="Warning">Section 5.5</a>)<a class="self" href="#rfc.section.B.p.8">¶</a></p>
          </div>
-      </section>
-      <section id="change.log" class="rfcEditorRemove">
-         <h2 id="rfc.section.C"><a href="#rfc.section.C">Appendix C.</a>&nbsp;<a href="#change.log">Change Log</a></h2>
-         <div id="rfc.section.C.p.1">
-            <p>This section is to be removed before publishing as an RFC.<a class="self" href="#rfc.section.C.p.1">¶</a></p>
-         </div>
-         <div id="rfc.section.C.p.2">
-            <p>See <a href="https://www.ietf.org/archive/id/draft-ietf-httpbis-cache-19.html#appendix-C">https://www.ietf.org/archive/id/draft-ietf-httpbis-cache-19.html#appendix-C</a> for changes up to version 19 of this document.<a class="self" href="#rfc.section.C.p.2">¶</a></p>
-         </div>
-         <section id="changes.since.19">
-            <h3 id="rfc.section.C.1"><a href="#rfc.section.C.1">C.1.</a>&nbsp;<a href="#changes.since.19">Since draft-ietf-httpbis-cache-19</a> <a class="self" href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-cache-19" title="plain text">📄</a></h3>
-            <div id="rfc.section.C.1.p.1">
-               <p>This (unpublished) draft contains changes that were made after draft 19 was approved
-                  by the IESG. Most changes are editorial only. <a class="self" href="#rfc.section.C.1.p.1">¶</a></p>
-            </div>
-            <div id="rfc.section.C.1.p.2">
-               <p>None.</p>
-            </div>
-         </section>
       </section>
       <section id="acks">
          <h2 id="rfc.section.unnumbered-1"><a href="#acks">Acknowledgements</a></h2>

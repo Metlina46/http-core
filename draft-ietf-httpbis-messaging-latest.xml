@@ -32,7 +32,7 @@
 <?rfc-ext xml2rfc-backend="202007"?>
 
 <rfc obsoletes="7230" category="std" x:maturity-level="internet"
-     ipr="pre5378Trust200902" docName="draft-ietf-httpbis-messaging-&ID-VERSION;"
+     ipr="pre5378Trust200902" number="9112"
      xmlns:x='http://purl.org/net/xml2rfc/ext'
      xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
      version="3" tocDepth="4" sortRefs="true">
@@ -79,7 +79,7 @@
     </address>
   </author>
 
-  <date/>
+  <date year="2022" month="April"/>
 
   <area>Applications and Real-Time</area>
   <workgroup>HTTP</workgroup>
@@ -99,22 +99,6 @@
    This document obsoletes portions of RFC 7230.
 </t>
 </abstract>
-
-<note title="Editorial Note" removeInRFC="true">
-  <t>
-    Discussion of this draft takes place on the HTTP working group
-    mailing list (ietf-http-wg@w3.org), which is archived at
-    <eref target="https://lists.w3.org/Archives/Public/ietf-http-wg/"/>.
-  </t>
-  <t>
-    Working Group information can be found at <eref target="https://httpwg.org/"/>;
-    source code and issues list for this draft can be found at
-    <eref target="https://github.com/httpwg/http-core"/>.
-  </t>
-  <t>
-    The changes in this draft are summarized in <xref target="changes.since.19"/>.
-  </t>
-</note>
 </front>
 <middle>
 <section title="Introduction" anchor="introduction">
@@ -3027,24 +3011,6 @@ Connection: close
    conflicts with the use of ranks in the <x:ref>TE</x:ref> header field.
    (<xref target="transfer.coding.registry"/>)
 </t>
-</section>
-</section>
-
-<section title="Change Log" anchor="change.log" removeInRFC="true">
-<t>
-  See <eref target="https://www.ietf.org/archive/id/draft-ietf-httpbis-messaging-19.html#appendix-D"/>
-  for changes up to version 19 of this document.
-</t>
-
-<section title="Since draft-ietf-httpbis-messaging-19" anchor="changes.since.19">
-<t>
-  This (unpublished) draft contains changes that were made after draft 19
-  was approved by the IESG. Most changes are editorial only. Furthermore:
-</t>
-<ul x:when-empty="None.">
-   <li>In <xref target="field.name.registration"/>, change status 'standard' to 'permanent' (<eref target="https://github.com/httpwg/http-core/issues/978"/>)</li>
-   <li>In <xref target="status.line"/>, align the prose about empty reason phrases with the current ABNF (<eref target="https://github.com/httpwg/http-core/issues/1005"/>)</li>
-</ul>
 </section>
 </section>
 

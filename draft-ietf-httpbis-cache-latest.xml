@@ -31,10 +31,9 @@
 <?rfc-ext xml2rfc-backend="202007"?>
 <?github-issue-label cache?>
 
-<rfc category="std" docName="draft-ietf-httpbis-cache-&ID-VERSION;" ipr="pre5378Trust200902"
+<rfc category="std" number="9111" ipr="pre5378Trust200902"
   obsoletes="7234" x:maturity-level="internet" xmlns:x="http://purl.org/net/xml2rfc/ext" xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
   version="3" tocDepth="4" sortRefs="true">
-<x:feedback template="mailto:ietf-http-wg@w3.org?subject={docname},%20%22{section}%22&amp;body=&lt;{ref}&gt;:"/>
 <front>
 
   <title>HTTP Caching</title>
@@ -77,7 +76,7 @@
     </address>
   </author>
 
-  <date/>
+  <date year="2022" month="April"/>
 
   <area>Applications and Real-Time</area>
   <workgroup>HTTP</workgroup>
@@ -97,23 +96,6 @@
    This document obsoletes RFC 7234.
 </t>
 </abstract>
-
-<note title="Editorial Note" removeInRFC="true">
-  <t>
-    Discussion of this draft takes place on the HTTP working group
-    mailing list (ietf-http-wg@w3.org), which is archived at
-    <eref target="https://lists.w3.org/Archives/Public/ietf-http-wg/"/>.
-  </t>
-  <t>
-    Working Group information can be found at <eref target="https://httpwg.org/"/>;
-    source code and issues list for this draft can be found at
-    <eref target="https://github.com/httpwg/http-core"/>.
-  </t>
-  <t>
-    The changes in this draft are summarized in <xref target="changes.since.19"/>.
-  </t>
-</note>
-
    </front>
    <middle>
 
@@ -2409,22 +2391,6 @@ Expires: Thu, 01 Dec 1994 16:00:00 GMT
    advisory. In practice, Warning was not added by caches or intermediaries.
    (<xref target="field.warning"/>)
 </t>
-</section>
-
-<section title="Change Log" anchor="change.log" removeInRFC="true">
-<t>
-  See <eref target="https://www.ietf.org/archive/id/draft-ietf-httpbis-cache-19.html#appendix-C"/>
-  for changes up to version 19 of this document.
-</t>
-
-<section title="Since draft-ietf-httpbis-cache-19" anchor="changes.since.19">
-<t>
-  This (unpublished) draft contains changes that were made after draft 19
-  was approved by the IESG. Most changes are editorial only.<!-- Furthermore:-->
-</t>
-<ul x:when-empty="None.">
-</ul>
-</section>
 </section>
 
 <section title="Acknowledgements" anchor="acks" numbered="false">

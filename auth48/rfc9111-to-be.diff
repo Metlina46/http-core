@@ -1,6 +1,6 @@
---- ../build/draft-ietf-httpbis-cache-latest.redxml	2022-04-01 11:04:24.976537100 +0100
-+++ rfc9111-to-be.xml	2022-04-01 09:16:44.030682900 +0100
-@@ -1,33 +1,40 @@
+--- ../build/draft-ietf-httpbis-cache-latest.redxml	2022-04-01 12:14:13.370925400 +0100
++++ rfc9111-to-be.xml	2022-04-01 11:13:51.170505300 +0100
+@@ -1,30 +1,40 @@
  <?xml version="1.0" encoding="UTF-8"?>
 -<!--
 -    This XML document is the output of clean-for-DTD.xslt; a tool that strips
@@ -37,9 +37,8 @@
       category="std"
 +     consensus="true" 
       ipr="pre5378Trust200902"
--     docName="draft-ietf-httpbis-cache-latest"
 +     docName="draft-ietf-httpbis-cache-19"
-+     number="9111"
+      number="9111"
       obsoletes="7234"
 -     version="3">
 -<!--see https://trac.tools.ietf.org/tools/xml2rfc/trac/ticket/420-->
@@ -51,9 +50,7 @@
 +<!--Note: see https://trac.tools.ietf.org/tools/xml2rfc/trac/ticket/420-->
 +<!-- 
  <?v3xml2rfc silence="Warning: Setting consensus="true" for IETF STD document"?>
- <?v3xml2rfc silence="Warning: Expected a valid submissionType (stream) setting"?>
--<!--see https://trac.tools.ietf.org/tools/xml2rfc/trac/ticket/439-->
--<?v3xml2rfc silence="The 'docName' attribute of the <rfc/> element"?>
++<?v3xml2rfc silence="Warning: Expected a valid submissionType (stream) setting"?>
 +-->
     <front>
 -      <title>HTTP Caching</title>
@@ -63,40 +60,19 @@
        <author fullname="Roy T. Fielding"
                initials="R."
                surname="Fielding"
-@@ -72,7 +79,7 @@
+@@ -69,9 +79,9 @@
              <uri>https://greenbytes.de/tech/webdav/</uri>
           </address>
        </author>
--      <date/>
+-      <date year="2022" month="April"/>
 +      <date year="2022" month="January"/>
        <area>Applications and Real-Time</area>
-       <workgroup>HTTP Working Group</workgroup>
+-      <workgroup>HTTP</workgroup>
++      <workgroup>HTTP Working Group</workgroup>
        <keyword>Hypertext Transfer Protocol</keyword>
-@@ -89,23 +96,6 @@
-    This document obsoletes RFC 7234.
- </t>
-       </abstract>
--      <note title="Editorial Note">
--         <t>This note is to be removed before publishing as an RFC.</t>
--         <t>
--    Discussion of this draft takes place on the HTTP working group
--    mailing list (ietf-http-wg@w3.org), which is archived at
--    <eref target="https://lists.w3.org/Archives/Public/ietf-http-wg/"
--                  brackets="angle"/>.
--  </t>
--         <t>
--    Working Group information can be found at <eref target="https://httpwg.org/" brackets="angle"/>;
--    source code and issues list for this draft can be found at
--    <eref target="https://github.com/httpwg/http-core" brackets="angle"/>.
--  </t>
--         <t>
--    The changes in this draft are summarized in <xref target="changes.since.19"/>.
--  </t>
--      </note>
-    </front>
-    <middle>
-       <section anchor="caching" title="Introduction">
-@@ -118,7 +108,8 @@
+       <keyword>HTTP</keyword>
+       <keyword>HTTP Caching</keyword>
+@@ -98,7 +108,8 @@
     defines aspects of HTTP related to caching and reusing response
     messages.
  </t>
@@ -106,7 +82,7 @@
           <t>
     An HTTP "cache" is a local store of response messages and the
     subsystem that controls storage, retrieval, and deletion of messages in it.
-@@ -150,16 +141,20 @@
+@@ -130,16 +141,20 @@
           <t>
     This document obsoletes <xref target="RFC7234" format="none">RFC 7234</xref>,
     with the changes being summarized in <xref target="changes.from.rfc.7234"/>.
@@ -135,7 +111,7 @@
              <t>
                 <xref target="HTTP" section="2"/> defines conformance criteria and contains considerations regarding error handling.
  </t>
-@@ -186,7 +181,7 @@
+@@ -166,7 +181,7 @@
  </t>
                 <t anchor="imported.rules">
                    <xref target="HTTP"/> defines the following rules:
@@ -144,7 +120,7 @@
                 <sourcecode type="abnf9110"><![CDATA[  HTTP-date     = <HTTP-date, see [HTTP], Section 5.6.7>
    OWS           = <OWS, see [HTTP], Section 5.6.3>
    field-name    = <field-name, see [HTTP], Section 5.1>
-@@ -219,7 +214,7 @@
+@@ -199,7 +214,7 @@
         binary form; an implementation could produce it as a string if
         any overflow occurs, even if the calculations are performed with an
         arithmetic type incapable of directly representing that number.
@@ -153,7 +129,7 @@
         negative value in later calculations.
     </t>
                 </aside>
-@@ -428,7 +423,7 @@
+@@ -408,7 +423,7 @@
  </t>
           </section>
           <section anchor="incomplete.responses" title="Storing Incomplete Responses">
@@ -162,7 +138,7 @@
     If the request method is GET, the response status code is 200
     (OK), and the entire response header section has been received, a
     cache <bcp14>MAY</bcp14> store a response body that is not complete (<xref target="HTTP" section="6.1"/>) if the stored response
-@@ -490,7 +485,7 @@
+@@ -470,7 +485,7 @@
           <t>
     When presented with a request, a cache <bcp14>MUST NOT</bcp14> reuse a stored response
     unless:
@@ -171,7 +147,7 @@
           <ul>
              <li>
                 <t>the presented target URI (<xref target="HTTP" section="7.1"/>) and
-@@ -539,14 +534,14 @@
+@@ -519,14 +534,14 @@
  </t>
           <iref item="collapsed requests"/>
           <t>
@@ -194,7 +170,7 @@
     additional latency.
  </t>
           <t>
-@@ -634,8 +629,7 @@
+@@ -614,8 +629,7 @@
              <iref item="stale"/>
              <t>
     A "fresh" response is one whose age has not yet exceeded its
@@ -204,7 +180,7 @@
  </t>
              <iref item="freshness lifetime"/>
              <iref item="explicit expiration time"/>
-@@ -682,7 +676,8 @@
+@@ -662,7 +676,8 @@
              <t>
    The calculation to determine if a response is fresh is:
  </t>
@@ -214,7 +190,7 @@
  ]]></sourcecode>
              <t>
     freshness_lifetime is defined in <xref target="calculating.freshness.lifetime"/>; current_age is defined in
-@@ -776,11 +771,11 @@
+@@ -756,11 +771,11 @@
     (<xref target="HTTP" section="8.8.2"/>), caches are encouraged to use a heuristic
     expiration value that is no more than some fraction of the interval since
     that time. A typical setting of this fraction might be 10%.
@@ -228,7 +204,7 @@
        (<xref target="RFC2616" section="13.9"/>) prohibited caches
        from calculating heuristic freshness for URIs with query components
        (i.e., those containing "?"). In practice, this has not been widely
-@@ -804,30 +799,40 @@
+@@ -784,30 +799,40 @@
     Age calculation uses the following data:
  </t>
                 <dl newline="true">
@@ -274,7 +250,7 @@
                    <dd>
       The value of the clock at the time the response
       was received.
-@@ -846,7 +851,8 @@
+@@ -826,7 +851,8 @@
     relative to the time the request was initiated, not the time that the
     response was received.</li>
                 </ol>
@@ -284,7 +260,7 @@
  
    response_delay = response_time - request_time;
    corrected_age_value = age_value + response_delay;
-@@ -857,14 +863,16 @@
+@@ -837,14 +863,16 @@
     insert <xref target="field.age" format="none">Age</xref> are present, corrected_initial_age can be calculated
     more conservatively as
  </t>
@@ -303,7 +279,7 @@
    current_age = corrected_initial_age + resident_time;
  ]]></sourcecode>
              </section>
-@@ -876,7 +884,7 @@
+@@ -856,7 +884,7 @@
  </t>
                 <t>
     A cache <bcp14>MUST NOT</bcp14> generate a stale response if it is prohibited by an
@@ -312,7 +288,7 @@
     directive, a must-revalidate response directive, or an applicable
     s-maxage or proxy-revalidate response directive; see <xref target="cache-response-directive"/>).
  </t>
-@@ -890,7 +898,7 @@
+@@ -870,7 +898,7 @@
              </section>
           </section>
           <section anchor="validation.model" title="Validation">
@@ -321,7 +297,7 @@
     When a cache has one or more stored responses for a requested URI, but
     cannot serve any of them (e.g., because they are not fresh, or one cannot
     be chosen; see <xref target="caching.negotiated.responses"/>), it can use
-@@ -1169,7 +1177,7 @@
+@@ -1149,7 +1177,7 @@
     (<xref target="HTTP" section="7.1"/>). This helps prevent denial-of-service attacks.
  </t>
              <t>
@@ -330,7 +306,7 @@
     stored responses whose target URI matches the given URI or mark them
     as "invalid" and in need of a mandatory validation before they can be sent
     in response to a subsequent request.
-@@ -1230,8 +1238,8 @@
+@@ -1210,8 +1238,8 @@
              <iref item="Cache-Control header field" primary="true"/>
              <t>
     The "Cache-Control" header field is used to list directives for caches
@@ -341,7 +317,7 @@
     same directive is present or copied in the response.
  </t>
              <t>
-@@ -1261,7 +1269,8 @@
+@@ -1241,7 +1269,8 @@
     For the cache directives defined below, no argument is defined (nor allowed)
     unless stated otherwise.
  </t>
@@ -351,7 +327,7 @@
                 <t>
     This section defines cache request directives. They are advisory; caches
     <bcp14>MAY</bcp14> implement them, but are not required to.
-@@ -1381,7 +1390,8 @@
+@@ -1361,7 +1390,8 @@
  </t>
                 </section>
              </section>
@@ -361,7 +337,7 @@
                 <t>
     This section defines cache response directives. A cache <bcp14>MUST</bcp14> obey the
     Cache-Control directives defined in this section.
-@@ -1446,10 +1456,10 @@
+@@ -1426,10 +1456,10 @@
     response's status code.
  </t>
                    <t>
@@ -375,7 +351,7 @@
     understands and implements the status code's caching requirements.
  </t>
                 </section>
-@@ -1634,9 +1644,8 @@
+@@ -1614,9 +1644,8 @@
     header field.
  </t>
                    <t>
@@ -387,7 +363,7 @@
     for a shared cache.
     A shared cache <bcp14>MUST NOT</bcp14> reuse a stale response with s-maxage to satisfy
     another request until it has been successfully validated by the origin, as
-@@ -1938,8 +1947,8 @@
+@@ -1918,8 +1947,8 @@
     Name Registry" at <eref target="https://www.iana.org/assignments/http-fields" brackets="angle"/>,
     as described in <xref target="HTTP" section="18.4"/>,
     with the field names listed in the table below:
@@ -398,7 +374,7 @@
              <table align="left" anchor="iana.header.registration.table">
                 <thead>
                    <tr>
-@@ -2093,7 +2102,7 @@
+@@ -2073,7 +2102,7 @@
                    </tr>
                 </tbody>
              </table>
@@ -407,7 +383,7 @@
           </section>
           <section anchor="warn.code.registration" title="Warn Code Registry">
              <t>
-@@ -2112,203 +2121,64 @@
+@@ -2092,205 +2121,64 @@
        </section>
     </middle>
     <back>
@@ -419,7 +395,7 @@
           <name>References</name>
           <references>
              <name>Normative References</name>
--            <reference anchor="HTTP"><!--included from draft-ietf-httpbis-semantics-latest.xml-->
+-            <reference anchor="HTTP" target="https://www.rfc-editor.org/info/rfc9110"><!--included from draft-ietf-httpbis-semantics-latest.xml-->
 -               <front>
 -                  <title>HTTP Semantics</title>
 -                  <author fullname="Roy T. Fielding"
@@ -468,7 +444,8 @@
 -                  </author>
 -                  <date year="2022" month="April"/>
 -               </front>
--               <seriesInfo name="Internet-Draft" value="draft-ietf-httpbis-semantics-latest"/>
+-               <seriesInfo name="RFC" value="9110"/>
+-               <seriesInfo name="DOI" value="10.17487/RFC9110"/>
 -            </reference>
 -            <reference anchor="RFC2119" target="https://www.rfc-editor.org/info/rfc2119">
 -               <front>
@@ -541,7 +518,7 @@
           </references>
           <references>
              <name>Informative References</name>
--            <reference anchor="HTTP11"><!--included from draft-ietf-httpbis-messaging-latest.xml-->
+-            <reference anchor="HTTP11" target="https://www.rfc-editor.org/info/rfc9112"><!--included from draft-ietf-httpbis-messaging-latest.xml-->
 -               <front>
 -                  <title>HTTP/1.1</title>
 -                  <author fullname="Roy T. Fielding"
@@ -590,7 +567,8 @@
 -                  </author>
 -                  <date year="2022" month="April"/>
 -               </front>
--               <seriesInfo name="Internet-Draft" value="draft-ietf-httpbis-messaging-latest"/>
+-               <seriesInfo name="RFC" value="9112"/>
+-               <seriesInfo name="DOI" value="10.17487/RFC9112"/>
 -            </reference>
 -            <reference anchor="RFC2616" target="https://www.rfc-editor.org/info/rfc2616">
 -               <front>
@@ -662,7 +640,7 @@
              <reference anchor="COOKIE" target="https://www.rfc-editor.org/info/rfc6265">
                 <front>
                    <title>HTTP State Management Mechanism</title>
-@@ -2318,18 +2188,8 @@
+@@ -2300,18 +2188,8 @@
                 <seriesInfo name="RFC" value="6265"/>
                 <seriesInfo name="DOI" value="10.17487/RFC6265"/>
              </reference>
@@ -683,27 +661,10 @@
           </references>
        </references>
        <section anchor="collected.abnf" title="Collected ABNF">
-@@ -2402,23 +2262,7 @@
+@@ -2384,6 +2262,7 @@
     (<xref target="field.warning"/>)
  </t>
        </section>
--      <section anchor="change.log" title="Change Log">
--         <t>This section is to be removed before publishing as an RFC.</t>
--         <t>
--  See <eref target="https://www.ietf.org/archive/id/draft-ietf-httpbis-cache-19.html#appendix-C"
--                  brackets="angle"/>
--  for changes up to version 19 of this document.
--</t>
--         <section anchor="changes.since.19" title="Since draft-ietf-httpbis-cache-19">
--            <t>
--  This (unpublished) draft contains changes that were made after draft 19
--  was approved by the IESG. Most changes are editorial only.<!-- Furthermore:-->
--</t>
--            <ul>
--               <li>None.</li>
--            </ul>
--         </section>
--      </section>
 +    
        <section anchor="acks" numbered="false" title="Acknowledgements">
           <t>
