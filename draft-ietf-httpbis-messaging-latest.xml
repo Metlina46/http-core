@@ -32,6 +32,7 @@
 <?rfc-ext xml2rfc-backend="202007"?>
 
 <rfc obsoletes="7230" category="std" x:maturity-level="internet"
+     seriesNo="97"
      ipr="pre5378Trust200902" number="9112"
      xmlns:x='http://purl.org/net/xml2rfc/ext'
      xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'

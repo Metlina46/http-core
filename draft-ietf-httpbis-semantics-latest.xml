@@ -34,6 +34,7 @@
 <rfc obsoletes="2818, 7230, 7231, 7232, 7233, 7235, 7538, 7615, 7694"
      updates="3864"
      category="std" x:maturity-level="internet"
+     seriesNo="97"
      ipr="pre5378Trust200902" number="9110"
      xmlns:x='http://purl.org/net/xml2rfc/ext'
      xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'

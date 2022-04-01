@@ -32,6 +32,7 @@
 <?github-issue-label cache?>
 
 <rfc category="std" number="9111" ipr="pre5378Trust200902"
+  seriesNo="97"
   obsoletes="7234" x:maturity-level="internet" xmlns:x="http://purl.org/net/xml2rfc/ext" xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
   version="3" tocDepth="4" sortRefs="true">
 <front>
