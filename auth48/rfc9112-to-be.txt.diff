@@ -1,20 +1,10 @@
---- draft-ietf-httpbis-messaging-latest.txt	2022-04-01 12:37:57.016418400 +0100
+--- draft-ietf-httpbis-messaging-latest.txt	2022-04-02 08:43:23.418373100 +0100
 +++ rfc9112-to-be.txt	2022-04-01 11:14:10.290417800 +0100
-@@ -3,12 +3,12 @@
- 
- 
- Internet Engineering Task Force (IETF)                  R. Fielding, Ed.
--Obsoletes: 7230                                                    Adobe
--Category: Standards Track                             M. Nottingham, Ed.
--ISSN: 2070-1721                                                   Fastly
--                                                         J. Reschke, Ed.
--                                                              greenbytes
+@@ -8,7 +8,7 @@
+ Obsoletes: 7230                                                   Fastly
+ Category: Standards Track                                J. Reschke, Ed.
+ ISSN: 2070-1721                                               greenbytes
 -                                                              April 2022
-+Request for Comments: 9112                                         Adobe
-+STD: 97                                               M. Nottingham, Ed.
-+Obsoletes: 7230                                                   Fastly
-+Category: Standards Track                                J. Reschke, Ed.
-+ISSN: 2070-1721                                               greenbytes
 +                                                           February 2022
  
  

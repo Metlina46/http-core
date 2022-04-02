@@ -1,6 +1,6 @@
---- ../build/draft-ietf-httpbis-cache-latest.redxml	2022-04-01 12:37:29.629074600 +0100
+--- ../build/draft-ietf-httpbis-cache-latest.redxml	2022-04-02 08:36:38.159288900 +0100
 +++ rfc9111-to-be.xml	2022-04-01 11:13:51.170505300 +0100
-@@ -1,31 +1,40 @@
+@@ -1,33 +1,40 @@
  <?xml version="1.0" encoding="UTF-8"?>
 -<!--
 -    This XML document is the output of clean-for-DTD.xslt; a tool that strips
@@ -55,13 +55,15 @@
 +-->
     <front>
 -      <title>HTTP Caching</title>
+-      <seriesInfo name="RFC" value="9111"/>
+-      <seriesInfo name="STD" value="97"/>
 +     <title>HTTP Caching</title>
 +     <seriesInfo name="RFC" value="9111"/>
 +     <seriesInfo name="STD" value="97"/>
        <author fullname="Roy T. Fielding"
                initials="R."
                surname="Fielding"
-@@ -70,9 +79,9 @@
+@@ -72,9 +79,9 @@
              <uri>https://greenbytes.de/tech/webdav/</uri>
           </address>
        </author>
@@ -73,7 +75,7 @@
        <keyword>Hypertext Transfer Protocol</keyword>
        <keyword>HTTP</keyword>
        <keyword>HTTP Caching</keyword>
-@@ -99,7 +108,8 @@
+@@ -101,7 +108,8 @@
     defines aspects of HTTP related to caching and reusing response
     messages.
  </t>
@@ -83,7 +85,7 @@
           <t>
     An HTTP "cache" is a local store of response messages and the
     subsystem that controls storage, retrieval, and deletion of messages in it.
-@@ -131,16 +141,20 @@
+@@ -133,16 +141,20 @@
           <t>
     This document obsoletes <xref target="RFC7234" format="none">RFC 7234</xref>,
     with the changes being summarized in <xref target="changes.from.rfc.7234"/>.
@@ -112,7 +114,7 @@
              <t>
                 <xref target="HTTP" section="2"/> defines conformance criteria and contains considerations regarding error handling.
  </t>
-@@ -167,7 +181,7 @@
+@@ -169,7 +181,7 @@
  </t>
                 <t anchor="imported.rules">
                    <xref target="HTTP"/> defines the following rules:
@@ -121,7 +123,7 @@
                 <sourcecode type="abnf9110"><![CDATA[  HTTP-date     = <HTTP-date, see [HTTP], Section 5.6.7>
    OWS           = <OWS, see [HTTP], Section 5.6.3>
    field-name    = <field-name, see [HTTP], Section 5.1>
-@@ -200,7 +214,7 @@
+@@ -202,7 +214,7 @@
         binary form; an implementation could produce it as a string if
         any overflow occurs, even if the calculations are performed with an
         arithmetic type incapable of directly representing that number.
@@ -130,7 +132,7 @@
         negative value in later calculations.
     </t>
                 </aside>
-@@ -409,7 +423,7 @@
+@@ -411,7 +423,7 @@
  </t>
           </section>
           <section anchor="incomplete.responses" title="Storing Incomplete Responses">
@@ -139,7 +141,7 @@
     If the request method is GET, the response status code is 200
     (OK), and the entire response header section has been received, a
     cache <bcp14>MAY</bcp14> store a response body that is not complete (<xref target="HTTP" section="6.1"/>) if the stored response
-@@ -471,7 +485,7 @@
+@@ -473,7 +485,7 @@
           <t>
     When presented with a request, a cache <bcp14>MUST NOT</bcp14> reuse a stored response
     unless:
@@ -148,7 +150,7 @@
           <ul>
              <li>
                 <t>the presented target URI (<xref target="HTTP" section="7.1"/>) and
-@@ -520,14 +534,14 @@
+@@ -522,14 +534,14 @@
  </t>
           <iref item="collapsed requests"/>
           <t>
@@ -171,7 +173,7 @@
     additional latency.
  </t>
           <t>
-@@ -615,8 +629,7 @@
+@@ -617,8 +629,7 @@
              <iref item="stale"/>
              <t>
     A "fresh" response is one whose age has not yet exceeded its
@@ -181,7 +183,7 @@
  </t>
              <iref item="freshness lifetime"/>
              <iref item="explicit expiration time"/>
-@@ -663,7 +676,8 @@
+@@ -665,7 +676,8 @@
              <t>
    The calculation to determine if a response is fresh is:
  </t>
@@ -191,7 +193,7 @@
  ]]></sourcecode>
              <t>
     freshness_lifetime is defined in <xref target="calculating.freshness.lifetime"/>; current_age is defined in
-@@ -757,11 +771,11 @@
+@@ -759,11 +771,11 @@
     (<xref target="HTTP" section="8.8.2"/>), caches are encouraged to use a heuristic
     expiration value that is no more than some fraction of the interval since
     that time. A typical setting of this fraction might be 10%.
@@ -205,7 +207,7 @@
        (<xref target="RFC2616" section="13.9"/>) prohibited caches
        from calculating heuristic freshness for URIs with query components
        (i.e., those containing "?"). In practice, this has not been widely
-@@ -785,30 +799,40 @@
+@@ -787,30 +799,40 @@
     Age calculation uses the following data:
  </t>
                 <dl newline="true">
@@ -251,7 +253,7 @@
                    <dd>
       The value of the clock at the time the response
       was received.
-@@ -827,7 +851,8 @@
+@@ -829,7 +851,8 @@
     relative to the time the request was initiated, not the time that the
     response was received.</li>
                 </ol>
@@ -261,7 +263,7 @@
  
    response_delay = response_time - request_time;
    corrected_age_value = age_value + response_delay;
-@@ -838,14 +863,16 @@
+@@ -840,14 +863,16 @@
     insert <xref target="field.age" format="none">Age</xref> are present, corrected_initial_age can be calculated
     more conservatively as
  </t>
@@ -280,7 +282,7 @@
    current_age = corrected_initial_age + resident_time;
  ]]></sourcecode>
              </section>
-@@ -857,7 +884,7 @@
+@@ -859,7 +884,7 @@
  </t>
                 <t>
     A cache <bcp14>MUST NOT</bcp14> generate a stale response if it is prohibited by an
@@ -289,7 +291,7 @@
     directive, a must-revalidate response directive, or an applicable
     s-maxage or proxy-revalidate response directive; see <xref target="cache-response-directive"/>).
  </t>
-@@ -871,7 +898,7 @@
+@@ -873,7 +898,7 @@
              </section>
           </section>
           <section anchor="validation.model" title="Validation">
@@ -298,7 +300,7 @@
     When a cache has one or more stored responses for a requested URI, but
     cannot serve any of them (e.g., because they are not fresh, or one cannot
     be chosen; see <xref target="caching.negotiated.responses"/>), it can use
-@@ -1150,7 +1177,7 @@
+@@ -1152,7 +1177,7 @@
     (<xref target="HTTP" section="7.1"/>). This helps prevent denial-of-service attacks.
  </t>
              <t>
@@ -307,7 +309,7 @@
     stored responses whose target URI matches the given URI or mark them
     as "invalid" and in need of a mandatory validation before they can be sent
     in response to a subsequent request.
-@@ -1211,8 +1238,8 @@
+@@ -1213,8 +1238,8 @@
              <iref item="Cache-Control header field" primary="true"/>
              <t>
     The "Cache-Control" header field is used to list directives for caches
@@ -318,7 +320,7 @@
     same directive is present or copied in the response.
  </t>
              <t>
-@@ -1242,7 +1269,8 @@
+@@ -1244,7 +1269,8 @@
     For the cache directives defined below, no argument is defined (nor allowed)
     unless stated otherwise.
  </t>
@@ -328,7 +330,7 @@
                 <t>
     This section defines cache request directives. They are advisory; caches
     <bcp14>MAY</bcp14> implement them, but are not required to.
-@@ -1362,7 +1390,8 @@
+@@ -1364,7 +1390,8 @@
  </t>
                 </section>
              </section>
@@ -338,7 +340,7 @@
                 <t>
     This section defines cache response directives. A cache <bcp14>MUST</bcp14> obey the
     Cache-Control directives defined in this section.
-@@ -1427,10 +1456,10 @@
+@@ -1429,10 +1456,10 @@
     response's status code.
  </t>
                    <t>
@@ -352,7 +354,7 @@
     understands and implements the status code's caching requirements.
  </t>
                 </section>
-@@ -1615,9 +1644,8 @@
+@@ -1617,9 +1644,8 @@
     header field.
  </t>
                    <t>
@@ -364,7 +366,7 @@
     for a shared cache.
     A shared cache <bcp14>MUST NOT</bcp14> reuse a stale response with s-maxage to satisfy
     another request until it has been successfully validated by the origin, as
-@@ -1919,8 +1947,8 @@
+@@ -1921,8 +1947,8 @@
     Name Registry" at <eref target="https://www.iana.org/assignments/http-fields" brackets="angle"/>,
     as described in <xref target="HTTP" section="18.4"/>,
     with the field names listed in the table below:
@@ -375,7 +377,7 @@
              <table align="left" anchor="iana.header.registration.table">
                 <thead>
                    <tr>
-@@ -2074,7 +2102,7 @@
+@@ -2076,7 +2102,7 @@
                    </tr>
                 </tbody>
              </table>
@@ -384,7 +386,7 @@
           </section>
           <section anchor="warn.code.registration" title="Warn Code Registry">
              <t>
-@@ -2093,205 +2121,64 @@
+@@ -2095,205 +2121,64 @@
        </section>
     </middle>
     <back>
@@ -641,7 +643,7 @@
              <reference anchor="COOKIE" target="https://www.rfc-editor.org/info/rfc6265">
                 <front>
                    <title>HTTP State Management Mechanism</title>
-@@ -2301,18 +2188,8 @@
+@@ -2303,18 +2188,8 @@
                 <seriesInfo name="RFC" value="6265"/>
                 <seriesInfo name="DOI" value="10.17487/RFC6265"/>
              </reference>
@@ -662,7 +664,7 @@
           </references>
        </references>
        <section anchor="collected.abnf" title="Collected ABNF">
-@@ -2385,6 +2262,7 @@
+@@ -2387,6 +2262,7 @@
     (<xref target="field.warning"/>)
  </t>
        </section>

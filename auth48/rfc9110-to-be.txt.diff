@@ -1,26 +1,15 @@
---- draft-ietf-httpbis-semantics-latest.txt	2022-04-01 12:37:48.460482300 +0100
+--- draft-ietf-httpbis-semantics-latest.txt	2022-04-02 08:43:17.993511000 +0100
 +++ rfc9110-to-be.txt	2022-04-01 11:14:03.563633700 +0100
-@@ -3,12 +3,13 @@
- 
- 
- Internet Engineering Task Force (IETF)                  R. Fielding, Ed.
--Obsoletes: 2818, 7230, 7231, 7232, 7233, 7235,                     Adobe
--           7538, 7615, 7694                           M. Nottingham, Ed.
--Updates: 3864                                                     Fastly
--Category: Standards Track                                J. Reschke, Ed.
--ISSN: 2070-1721                                               greenbytes
--                                                              April 2022
-+Request for Comments: 9110                                         Adobe
-+STD: 97                                               M. Nottingham, Ed.
-+Obsoletes: 2818, 7230, 7231, 7232, 7233, 7235,                    Fastly
-+           7538, 7615, 7694                              J. Reschke, Ed.
-+Updates: 3864                                                 greenbytes
+@@ -8,7 +8,7 @@
+ Obsoletes: 2818, 7230, 7231, 7232, 7233, 7235,                    Fastly
+            7538, 7615, 7694                              J. Reschke, Ed.
+ Updates: 3864                                                 greenbytes
+-Category: Standards Track                                     April 2022
 +Category: Standards Track                                     March 2022
-+ISSN: 2070-1721
+ ISSN: 2070-1721
  
  
-                              HTTP Semantics
-@@ -547,8 +548,8 @@
+@@ -548,8 +548,8 @@
  
     The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
     "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -31,7 +20,7 @@
     capitals, as shown here.
  
     This specification targets conformance criteria according to the role
-@@ -9354,7 +9355,7 @@
+@@ -9355,7 +9355,7 @@
  19.1.  Normative References
  
     [CACHING]  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
@@ -40,7 +29,7 @@
                2022, <https://www.rfc-editor.org/info/rfc9111>.
  
     [RFC1950]  Deutsch, P. and J-L. Gailly, "ZLIB Compressed Data Format
-@@ -9516,7 +9517,7 @@
+@@ -9517,7 +9517,7 @@
                <https://www.rfc-editor.org/info/rfc1945>.
  
     [HTTP/1.1] Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
@@ -49,7 +38,7 @@
                2022, <https://www.rfc-editor.org/info/rfc9112>.
  
     [HTTP/2]   Thomson, M., Ed. and C. Benfield, Ed., "HTTP/2", RFC 9113,
-@@ -9524,7 +9525,7 @@
+@@ -9525,7 +9525,7 @@
                <https://www.rfc-editor.org/info/rfc9113>.
  
     [HTTP/3]   Bishop, M., Ed., "Hypertext Transfer Protocol Version 3

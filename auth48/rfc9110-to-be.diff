@@ -1,6 +1,6 @@
---- ../build/draft-ietf-httpbis-semantics-latest.redxml	2022-04-01 12:37:29.629637800 +0100
+--- ../build/draft-ietf-httpbis-semantics-latest.redxml	2022-04-02 08:36:34.455371800 +0100
 +++ rfc9110-to-be.xml	2022-04-01 11:13:50.106341400 +0100
-@@ -1,31 +1,52 @@
+@@ -1,30 +1,49 @@
  <?xml version="1.0" encoding="UTF-8"?>
 -<!--
 +
@@ -64,12 +64,9 @@
     <front>
 +
        <title>HTTP Semantics</title>
-+      <seriesInfo name="RFC" value="9110"/>
-+      <seriesInfo name="STD" value="97"/>
-       <author fullname="Roy T. Fielding"
-               initials="R."
-               surname="Fielding"
-@@ -70,7 +91,7 @@
+       <seriesInfo name="RFC" value="9110"/>
+       <seriesInfo name="STD" value="97"/>
+@@ -72,7 +91,7 @@
              <uri>https://greenbytes.de/tech/webdav/</uri>
           </address>
        </author>
@@ -78,7 +75,7 @@
        <area>Applications and Real-Time</area>
        <workgroup>HTTP Working Group</workgroup>
        <keyword>Hypertext Transfer Protocol</keyword>
-@@ -88,13 +109,14 @@
+@@ -90,13 +109,14 @@
     versions. In this definition are core protocol elements, extensibility
     mechanisms, and the "http" and "https" Uniform Resource Identifier (URI)
     schemes.
@@ -94,7 +91,7 @@
     </front>
     <middle>
        <section anchor="introduction" title="Introduction">
-@@ -135,10 +157,10 @@
+@@ -137,10 +157,10 @@
           </section>
           <section anchor="history.and.evolution" title="History and Evolution">
              <t>
@@ -109,7 +106,7 @@
     As the Web grew, HTTP was extended to enclose requests and responses within
     messages, transfer arbitrary data formats using MIME-like media types, and
     route requests through intermediaries. These protocols were eventually
-@@ -215,8 +237,8 @@
+@@ -217,8 +237,8 @@
           </section>
           <section anchor="specifications.obsoleted.by.this.document"
                    title="Specifications Obsoleted by This Document">
@@ -120,7 +117,7 @@
                    <tr>
                       <th>Title</th>
                       <th>Reference</th>
-@@ -382,12 +404,14 @@
+@@ -384,12 +404,14 @@
           </section>
           <section anchor="requirements.notation" title="Requirements Notation">
              <t>
@@ -141,7 +138,7 @@
  </t>
              <t>
     This specification targets conformance criteria according to the role of
-@@ -792,8 +816,8 @@
+@@ -794,8 +816,8 @@
     The terms "upstream" and "downstream" are
     used to describe directional requirements in relation to the message flow:
     all messages flow from upstream to downstream.
@@ -152,7 +149,7 @@
     inbound means "toward the origin server", whereas
     outbound means "toward the user agent".
  </t>
-@@ -853,11 +877,11 @@
+@@ -855,11 +877,11 @@
     from an on-path attacker, often introducing security flaws or
     interoperability problems due to mistakenly violating HTTP semantics.
  </t>
@@ -166,7 +163,7 @@
     known as a "transparent proxy" <xref target="RFC1919"/>)
     differs from an HTTP proxy because it is not chosen by the client.
     Instead, an interception proxy filters or redirects outgoing TCP port 80
-@@ -1983,7 +2007,7 @@
+@@ -1985,7 +2007,7 @@
    ]]></artwork>
                 <t>
     Examples of the two obsolete formats are
@@ -175,7 +172,7 @@
                 <artwork type="example"><![CDATA[
    Sunday, 06-Nov-94 08:49:37 GMT   ; obsolete RFC 850 format
    Sun Nov  6 08:49:37 1994         ; ANSI C's asctime() format
-@@ -2864,12 +2888,12 @@
+@@ -2866,12 +2888,12 @@
                 <iref primary="true" item="Fields" subitem="Connection"/>
                 <iref primary="true" item="Header Fields" subitem="Connection"/>
                 <iref primary="true" item="Connection header field"/>
@@ -190,7 +187,7 @@
                 <sourcecode type="abnf9110"><![CDATA[  Connection        = #connection-option
    connection-option = token
  ]]></sourcecode>
-@@ -2902,9 +2926,8 @@
+@@ -2904,9 +2926,8 @@
  </t>
                 <t>
     Furthermore, intermediaries <bcp14>SHOULD</bcp14> remove or replace fields
@@ -202,7 +199,7 @@
  </t>
                 <ul>
                    <li>Proxy-Connection (<xref target="HTTP11" section="C.2.2"/>)</li>
-@@ -4174,14 +4197,14 @@
+@@ -4176,14 +4197,14 @@
  </t>
                    <dl>
                       <dt>
@@ -219,7 +216,7 @@
    </dt>
                       <dd>
      two entity tags are equivalent if their opaque-tags match
-@@ -4485,8 +4508,7 @@
+@@ -4487,8 +4508,7 @@
              <section anchor="idempotent.methods" title="Idempotent Methods">
                 <iref item="idempotent" primary="true"/>
                 <t>
@@ -229,7 +226,7 @@
     if the intended effect on the server of multiple identical requests with
     that method is the same as the effect for a single such request.
     Of the request methods defined by this
-@@ -4710,7 +4732,7 @@
+@@ -4712,7 +4732,7 @@
     Responses to POST requests are only cacheable when they include explicit
     freshness information (see <xref target="CACHING" section="4.2.1"/>) and a
     <xref target="field.content-location" format="none">Content-Location</xref> header field that has the same value as
@@ -238,7 +235,7 @@
     to satisfy a later GET or HEAD request. In contrast, a POST request cannot
     be satisfied by a cached POST response because POST is potentially unsafe;
     see <xref target="CACHING" section="4"/>.
-@@ -5381,9 +5403,9 @@
+@@ -5383,9 +5403,9 @@
     transfer codings and trailer sections.
  </t>
                 <t>
@@ -251,7 +248,7 @@
  </t>
                 <t>
     TE is also used within HTTP/1.1 to advise servers about which transfer
-@@ -5691,8 +5713,8 @@
+@@ -5693,8 +5713,8 @@
     specified independently and ought to be registered within the
     "Hypertext Transfer Protocol (HTTP) Authentication Scheme Registry".
     For example, the "basic" and "digest" authentication schemes are defined by
@@ -262,7 +259,7 @@
  </t>
           </section>
           <section anchor="auth.params" title="Authentication Parameters">
-@@ -5755,7 +5777,7 @@
+@@ -5757,7 +5777,7 @@
                 <t>
                    <strong>Note:</strong> Many clients fail to parse a challenge that contains an unknown
       scheme. A workaround for this problem is to list well-supported schemes
@@ -271,7 +268,7 @@
    </t>
              </aside>
              <t>
-@@ -5906,8 +5928,7 @@
+@@ -5908,8 +5928,7 @@
                 <t>
    This header field contains two challenges, one for the "Basic" scheme with
    a realm value of "simple" and another for the "Newauth" scheme with a
@@ -281,7 +278,7 @@
  </t>
                 <t>
    Some user agents do not recognize this form, however. As a result, sending
-@@ -6202,8 +6223,7 @@
+@@ -6204,8 +6223,7 @@
           </section>
           <section anchor="reactive.negotiation" title="Reactive Negotiation">
              <t>
@@ -291,7 +288,7 @@
     content (regardless of the status code) is performed by
     the user agent after receiving an initial response. The mechanism for
     reactive negotiation might be as simple as a list of references to
-@@ -6324,9 +6344,9 @@
+@@ -6326,9 +6344,9 @@
                    <t>
                       <strong>Note:</strong> In practice, using wildcards in content negotiation has limited
     practical value because it is seldom useful to say, for example, "I
@@ -304,7 +301,7 @@
     they still need to be able to handle a different response since the
     server is allowed to ignore their preference.
  </t>
-@@ -6611,8 +6631,8 @@
+@@ -6613,8 +6631,8 @@
     The most common use of Accept-Encoding is in responses with a
     <xref target="status.415" format="none">415 (Unsupported Media Type)</xref> status code, in response to
     optimistic use of a content coding by clients. However, the header field
@@ -315,7 +312,7 @@
     in a <xref target="status.2xx" format="none">2xx (Successful)</xref> response when the request content was
     big enough to justify use of a compression coding but the client failed do
     so.
-@@ -7634,13 +7654,13 @@
+@@ -7636,13 +7654,13 @@
                       <t>The first 500 bytes (byte offsets 0-499, inclusive):</t>
                       <artwork type="example"><![CDATA[
       bytes=0-499
@@ -331,7 +328,7 @@
                    </li>
                 </ul>
                 <t>
-@@ -7666,23 +7686,23 @@
+@@ -7668,23 +7686,23 @@
                       <t>The final 500 bytes (byte offsets 9500-9999, inclusive):</t>
                       <artwork type="example"><![CDATA[
       bytes=-500
@@ -359,7 +356,7 @@
                    </li>
                    <li>
                       <t>Other valid (but not canonical) specifications of the second 500
-@@ -7690,7 +7710,7 @@
+@@ -7692,7 +7710,7 @@
                       <artwork type="example"><![CDATA[
       bytes=500-600,601-999
       bytes=500-700,601-999
@@ -368,7 +365,7 @@
                    </li>
                 </ul>
                 <t>
-@@ -7699,7 +7719,8 @@
+@@ -7701,7 +7719,8 @@
  </t>
                 <ul>
                    <li>an <xref target="rule.int-range" format="none">int-range</xref> with a <xref target="rule.int-range" format="none">first-pos</xref> that
@@ -378,7 +375,7 @@
                    <li>a <xref target="rule.suffix-range" format="none">suffix-range</xref> with a non-zero
         <xref target="rule.suffix-range" format="none">suffix-length</xref>.</li>
                 </ul>
-@@ -8039,8 +8060,7 @@
+@@ -8041,8 +8060,7 @@
        string incorrectly.</li>
                 <li>A number of clients and servers were coded to an early draft
        of the byteranges specification that used a media type of
@@ -388,7 +385,7 @@
        which is almost (but not quite) compatible with this type.</li>
              </ol>
              <t>
-@@ -8328,7 +8348,7 @@
+@@ -8330,7 +8348,7 @@
     message content unless the message framing explicitly indicates that the
     content has zero length. If some aspect of the request indicates a
     preference for no content upon success, the origin server ought to send a
@@ -397,7 +394,7 @@
     For CONNECT, there is no content because the successful result is a
     tunnel, which begins immediately after the 200 response header section.
  </t>
-@@ -8706,8 +8726,8 @@
+@@ -8708,8 +8726,8 @@
      <xref target="status.307" format="none">307 (Temporary Redirect)</xref> and
      <xref target="status.308" format="none">308 (Permanent Redirect)</xref>
                    <xref target="RFC7538"/> were
@@ -408,7 +405,7 @@
      request to be redirected as GET.
    </t>
              </aside>
-@@ -10051,7 +10071,7 @@
+@@ -10053,7 +10071,7 @@
                    </li>
                 </ul>
              </section>
@@ -417,7 +414,7 @@
           <section anchor="range.unit.extensibility" title="Range Unit Extensibility">
              <section anchor="range.unit.registry" title="Range Unit Registry">
                 <t>
-@@ -10733,8 +10753,7 @@
+@@ -10735,8 +10753,7 @@
  </t>
           <section anchor="uri.scheme.registration" title="URI Scheme Registration">
              <t>
@@ -427,7 +424,7 @@
     <eref target="https://www.iana.org/assignments/uri-schemes/" brackets="angle"/> with the
     permanent schemes listed in <xref target="uri.scheme.table"/> in <xref target="uri.schemes"/>.
  </t>
-@@ -10746,7 +10765,9 @@
+@@ -10748,7 +10765,9 @@
    registration procedure of <xref target="method.registry"/> and the method
    names summarized in the following table.
  </t>
@@ -438,7 +435,7 @@
              <table anchor="iana.method.registration.table">
                 <thead>
                    <tr>
-@@ -10831,7 +10852,7 @@
+@@ -10833,7 +10852,7 @@
                    </tr>
                 </tbody>
              </table>
@@ -447,7 +444,7 @@
              <t>
                 <iref primary="true" item="Method" subitem="*"/>
     The method name "*" is reserved because using "*" as a method name would
-@@ -10847,7 +10868,8 @@
+@@ -10849,7 +10868,8 @@
     the registration procedure of <xref target="status.code.registry"/> and the
     status code values summarized in the following table.
  </t>
@@ -457,7 +454,7 @@
              <table anchor="iana.status.code.registration.table">
                 <thead>
                    <tr>
-@@ -11181,7 +11203,7 @@
+@@ -11183,7 +11203,7 @@
                    </tr>
                 </tbody>
              </table>
@@ -466,7 +463,7 @@
           </section>
           <section anchor="field.name.registration" title="Field Name Registration">
              <t>
-@@ -11192,13 +11214,13 @@
+@@ -11194,13 +11214,13 @@
     registry.
  </t>
              <t>
@@ -483,7 +480,7 @@
                       brackets="angle"/>) with the
     protocol 'http' to this registry and has applied the following changes:
  </t>
-@@ -11214,20 +11236,20 @@
+@@ -11216,20 +11236,20 @@
     evidence that another is more appropriate.</li>
              </ol>
              <t>
@@ -511,7 +508,7 @@
              <t>
     IANA has updated the "Hypertext Transfer Protocol (HTTP) Field Name Registry"
     with the field names listed in the following table.
-@@ -11749,7 +11771,7 @@
+@@ -11751,7 +11771,7 @@
           </section>
           <section anchor="upgrade.token.registration" title="Upgrade Token Registration">
              <t>
@@ -520,7 +517,7 @@
     "Hypertext Transfer Protocol (HTTP) Upgrade Token Registry" at
     <eref target="https://www.iana.org/assignments/http-upgrade-tokens"
                       brackets="angle"/>
-@@ -11780,98 +11802,38 @@
+@@ -11782,98 +11802,38 @@
        </section>
     </middle>
     <back>
@@ -647,7 +644,7 @@
              <reference anchor="URI" target="https://www.rfc-editor.org/info/rfc3986">
                 <front>
                    <title abbrev="URI Generic Syntax">Uniform Resource Identifier (URI): Generic Syntax</title>
-@@ -11894,61 +11856,9 @@
+@@ -11896,61 +11856,9 @@
                 <seriesInfo name="RFC" value="793"/>
                 <seriesInfo name="DOI" value="10.17487/RFC0793"/>
              </reference>
@@ -712,7 +709,7 @@
                    <author initials="A."
                            surname="Phillips"
                            fullname="Addison Phillips"
-@@ -11957,42 +11867,21 @@
+@@ -11959,42 +11867,21 @@
                            surname="Davis"
                            fullname="Mark Davis"
                            role="editor"/>
@@ -770,7 +767,7 @@
              <reference anchor="TLS13" target="https://www.rfc-editor.org/info/rfc8446">
                 <front>
                    <title>The Transport Layer Security (TLS) Protocol Version 1.3</title>
-@@ -12012,109 +11901,43 @@
+@@ -12014,109 +11901,43 @@
                 </front>
                 <seriesInfo name="ANSI" value="X3.4"/>
              </reference>
@@ -899,7 +896,7 @@
                 </front>
                 <seriesInfo name="RFC" value="9112"/>
                 <seriesInfo name="DOI" value="10.17487/RFC9112"/>
-@@ -12199,7 +12022,7 @@
+@@ -12201,7 +12022,7 @@
                    <author initials="D." surname="Kristol" fullname="David M. Kristol"/>
                    <date year="2001" month="November"/>
                 </front>
@@ -908,7 +905,7 @@
              </reference>
              <reference anchor="Sniffing" target="https://mimesniff.spec.whatwg.org">
                 <front>
-@@ -12218,70 +12041,25 @@
+@@ -12220,70 +12041,25 @@
                 </front>
                 <refcontent>Doctoral Dissertation, University of California, Irvine</refcontent>
              </reference>
@@ -990,7 +987,7 @@
              <reference anchor="RFC2324" target="https://www.rfc-editor.org/info/rfc2324">
                 <front>
                    <title>Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)</title>
-@@ -12291,122 +12069,19 @@
+@@ -12293,122 +12069,19 @@
                 <seriesInfo name="RFC" value="2324"/>
                 <seriesInfo name="DOI" value="10.17487/RFC2324"/>
              </reference>
@@ -1123,7 +1120,7 @@
                    <date month="June" year="2007"/>
                 </front>
                 <seriesInfo name="RFC" value="4918"/>
-@@ -12438,152 +12113,16 @@
+@@ -12440,152 +12113,16 @@
                 <seriesInfo name="RFC" value="7541"/>
                 <seriesInfo name="DOI" value="10.17487/RFC7541"/>
              </reference>
@@ -1286,7 +1283,7 @@
              <reference anchor="ALTSVC" target="https://www.rfc-editor.org/info/rfc7838">
                 <front>
                    <title>HTTP Alternative Services</title>
-@@ -12595,92 +12134,35 @@
+@@ -12597,92 +12134,35 @@
                 <seriesInfo name="RFC" value="7838"/>
                 <seriesInfo name="DOI" value="10.17487/RFC7838"/>
              </reference>
@@ -1393,7 +1390,7 @@
              </referencegroup>
              <reference anchor="RFC3864" target="https://www.rfc-editor.org/info/rfc3864">
                 <front>
-@@ -12723,120 +12205,19 @@
+@@ -12725,120 +12205,19 @@
                 <seriesInfo name="RFC" value="6265"/>
                 <seriesInfo name="DOI" value="10.17487/RFC6265"/>
              </reference>
@@ -1527,7 +1524,7 @@
              <reference anchor="OWASP" target="https://www.owasp.org/" quote-title="false">
                 <front>
                    <title>The Open Web Application Security Project</title>
-@@ -13090,13 +12471,13 @@
+@@ -13092,13 +12471,13 @@
  </t>
              <t>
     The requirement on semantic conformance has been replaced with permission to
@@ -1543,7 +1540,7 @@
     (Sections <xref target="http.uri" format="counter"/>, <xref target="https.uri" format="counter"/>,
     <xref target="origin" format="counter"/>, and <xref target="routing.origin" format="counter"/>)
  </t>
-@@ -13107,7 +12488,7 @@
+@@ -13109,7 +12488,7 @@
  </t>
              <t>
     Parameters in media type, media range, and expectation can be empty via
@@ -1552,7 +1549,7 @@
     (<xref target="parameter"/>)
  </t>
              <t>
-@@ -13148,8 +12529,8 @@
+@@ -13150,8 +12529,8 @@
     (<xref target="uri.references"/>)
  </t>
              <t>
@@ -1563,7 +1560,7 @@
     stripped from field values before they are consumed.
     (<xref target="fields.values"/>)
  </t>
-@@ -13184,12 +12565,11 @@
+@@ -13186,12 +12565,11 @@
     (<xref target="idempotent.methods"/>)
  </t>
              <t>
@@ -1578,7 +1575,7 @@
     (<xref target="field.content-range"/>) as a request modifier on PUT is allowed.
     (<xref target="PUT"/>)
  </t>
-@@ -13204,12 +12584,12 @@
+@@ -13206,12 +12584,12 @@
     (<xref target="TRACE"/>)
  </t>
              <t>
@@ -1594,7 +1591,7 @@
     messages; the latter was introduced by <xref target="RFC7694"/>.
     (<xref target="request.content.negotiation"/>)
  </t>
-@@ -13240,8 +12620,8 @@
+@@ -13242,8 +12620,8 @@
     (<xref target="status.3xx"/>)
  </t>
              <t>
@@ -1605,7 +1602,7 @@
     (<xref target="status.308"/>)
  </t>
              <t>
-@@ -13253,8 +12633,8 @@
+@@ -13255,8 +12633,8 @@
  </t>
              <t>
     Status code 422 (previously defined in
@@ -1616,7 +1613,7 @@
     (<xref target="status.422"/>)
  </t>
           </section>
-@@ -13277,8 +12657,8 @@
+@@ -13279,8 +12657,8 @@
     <xref target="field.if-unmodified-since" format="counter"/>)
  </t>
              <t>
@@ -1627,7 +1624,7 @@
     (<xref target="field.if-unmodified-since"/>)
  </t>
              <t>
-@@ -13337,40 +12717,38 @@
+@@ -13339,40 +12717,38 @@
     Aside from the current editors, the following individuals deserve special
     recognition for their contributions to early aspects of HTTP and its
     core specifications:
@@ -1691,7 +1688,7 @@
     Since 2014, the following contributors have helped improve this
     specification by reporting bugs, asking smart questions, drafting or
     reviewing text, and evaluating issues:
-@@ -13470,5 +12848,5 @@
+@@ -13472,5 +12848,5 @@
     <contact fullname="Zaheduzzaman Sarker"/>.
  </t>
        </section>
